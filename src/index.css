@@ -1,0 +1,382 @@
+/*
+ * Estilos globais do Gerenciador de Tarefas.
+ * Layout mobile-first com variáveis de cor, cartões, formulários e lista
+ * de tarefas — CSS puro, sem frameworks.
+ */
+
+/* ---- Variáveis de tema ---- */
+:root {
+  --cor-primaria: #4f46e5;
+  --cor-primaria-escura: #4338ca;
+  --cor-primaria-suave: #eef2ff;
+  --cor-texto: #1f2340;
+  --cor-texto-suave: #6b7280;
+  --cor-fundo: #eef0f7;
+  --cor-superficie: #ffffff;
+  --cor-borda: #e2e4ee;
+  --cor-erro: #b3261e;
+  --cor-erro-fundo: #fdecea;
+  --cor-sucesso-aviso: #92400e;
+  --cor-aviso-fundo: #fef3c7;
+  --sombra: 0 1px 3px rgba(31, 35, 64, 0.08), 0 4px 16px rgba(31, 35, 64, 0.06);
+  --raio: 12px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+/* ---- Reset básico ---- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--cor-fundo);
+  color: var(--cor-texto);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+/* ---- Botões ---- */
+.botao-primario {
+  background: var(--cor-primaria);
+  color: #fff;
+  border: none;
+  border-radius: var(--raio);
+  padding: 0.7rem 1.1rem;
+  font-weight: 600;
+  transition: background 0.15s ease;
+}
+
+.botao-primario:hover:not(:disabled) {
+  background: var(--cor-primaria-escura);
+}
+
+.botao-primario:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.botao-neutro {
+  background: transparent;
+  color: var(--cor-texto-suave);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 0.7rem 1.1rem;
+  font-weight: 600;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.botao-neutro:hover:not(:disabled) {
+  border-color: var(--cor-primaria);
+  color: var(--cor-primaria);
+}
+
+.botao-acao {
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: var(--cor-texto-suave);
+  padding: 0.35rem 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.botao-acao:hover {
+  background: var(--cor-primaria-suave);
+  color: var(--cor-primaria);
+}
+
+.botao-acao.perigo:hover {
+  background: var(--cor-erro-fundo);
+  color: var(--cor-erro);
+}
+
+/* ---- Campos de formulário ---- */
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.campo label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 0.7rem 0.9rem;
+  font: inherit;
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--cor-primaria);
+  box-shadow: 0 0 0 3px var(--cor-primaria-suave);
+}
+
+/* ---- Mensagens ---- */
+.mensagem-erro {
+  background: var(--cor-erro-fundo);
+  color: var(--cor-erro);
+  border-radius: var(--raio);
+  padding: 0.7rem 0.9rem;
+  font-size: 0.9rem;
+  margin: 0 0 1rem;
+}
+
+.aviso-offline {
+  background: var(--cor-aviso-fundo);
+  color: var(--cor-sucesso-aviso);
+  border-radius: var(--raio);
+  padding: 0.7rem 0.9rem;
+  font-size: 0.9rem;
+  margin: 0 0 1rem;
+}
+
+/* ---- Tela de carregamento ---- */
+.tela-carregando {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--cor-texto-suave);
+}
+
+.spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--cor-borda);
+  border-top-color: var(--cor-primaria);
+  border-radius: 50%;
+  animation: girar 0.8s linear infinite;
+}
+
+@keyframes girar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---- Páginas de autenticação (login/cadastro) ---- */
+.pagina-auth {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.cartao-auth {
+  background: var(--cor-superficie);
+  border-radius: 16px;
+  box-shadow: var(--sombra);
+  padding: 2rem 1.5rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.marca {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.marca img {
+  border-radius: 14px;
+}
+
+.marca h1 {
+  font-size: 1.35rem;
+  margin: 0.75rem 0 0.25rem;
+}
+
+.marca-subtitulo {
+  color: var(--cor-texto-suave);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.cartao-auth .botao-primario {
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+.alternar-auth {
+  text-align: center;
+  color: var(--cor-texto-suave);
+  font-size: 0.9rem;
+  margin: 1.25rem 0 0;
+}
+
+.alternar-auth a {
+  color: var(--cor-primaria);
+  font-weight: 600;
+}
+
+/* ---- Página de tarefas ---- */
+.pagina-tarefas {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.cabecalho {
+  background: var(--cor-superficie);
+  border-bottom: 1px solid var(--cor-borda);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+}
+
+.cabecalho-marca {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.cabecalho-marca img {
+  border-radius: 9px;
+}
+
+.cabecalho-usuario {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.usuario-email {
+  color: var(--cor-texto-suave);
+  font-size: 0.85rem;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cabecalho .botao-neutro {
+  padding: 0.45rem 0.9rem;
+}
+
+.conteudo-tarefas {
+  flex: 1;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+}
+
+/* ---- Formulário de tarefa ---- */
+.form-tarefa {
+  margin-bottom: 1.5rem;
+}
+
+.form-tarefa .mensagem-erro {
+  margin-bottom: 0.75rem;
+}
+
+.linha-form-tarefa {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.linha-form-tarefa input {
+  flex: 1 1 220px;
+}
+
+/* ---- Lista de tarefas ---- */
+.lista-tarefas ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.tarefa {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 0.85rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  box-shadow: var(--sombra);
+}
+
+.tarefa-conteudo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.tarefa-conteudo input[type="checkbox"] {
+  width: 1.2rem;
+  height: 1.2rem;
+  accent-color: var(--cor-primaria);
+  flex-shrink: 0;
+}
+
+.tarefa-titulo {
+  overflow-wrap: anywhere;
+}
+
+/* Tarefa concluída: título riscado e levemente esmaecido */
+.tarefa.concluida .tarefa-titulo {
+  text-decoration: line-through;
+  color: var(--cor-texto-suave);
+}
+
+.tarefa-acoes {
+  display: flex;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+
+.estado-lista {
+  text-align: center;
+  color: var(--cor-texto-suave);
+  padding: 2rem 1rem;
+}
+
+.rodape {
+  text-align: center;
+  color: var(--cor-texto-suave);
+  font-size: 0.8rem;
+  padding: 1rem;
+}
+
+/* ---- Telas maiores ---- */
+@media (min-width: 600px) {
+  .cabecalho {
+    padding: 0.9rem 1.5rem;
+  }
+
+  .usuario-email {
+    max-width: 220px;
+  }
+
+  .conteudo-tarefas {
+    padding: 2rem 1.5rem;
+  }
+}

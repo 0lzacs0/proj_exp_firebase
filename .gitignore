@@ -1,0 +1,15 @@
+# Dependências
+node_modules/
+
+# Build de produção
+dist/
+
+# Variáveis de ambiente (chaves do Firebase ficam apenas locais)
+.env
+
+# Cache local do Firebase CLI
+.firebase/
+
+# Diversos
+*.log
+.DS_Store
